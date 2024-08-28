@@ -7,8 +7,22 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="mx-auto">
-                        <a href=" {{ url('/categoria/create') }} " class="btn btn-success btn-sm active" role="button" aria-pressed="true">CRIAR</a>
+                        <a href=" {{ url('/categoria/create') }} " class="btn btn-success" role="button" aria-pressed="true">CRIAR</a>
                     </div>
+
+                    @if (session('mensagem'))
+                        <br>
+                        <div class="alert alert-success">
+                            {{ session('mensagem') }}
+                        </div>
+                    @endif
+
+                    @if (session('exclusao'))
+                        <br>
+                        <div class="alert alert-danger">
+                            {{ session('exclusao') }}
+                        </div>
+                    @endif
 
                     <table>
                         <tr>
@@ -21,7 +35,13 @@
                             <tr>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->nome}}</td>
-                                <td><a href=" {{ url('/categoria/' . $value->id) }} " class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Visualizar</a></td>
+                                <td><a href=" {{ url('/categoria/' . $value->id) }} " class="btn btn-primary " role="button" aria-pressed="true">Visualizar</a></td>
+                                <td><a href=" {{ url('/categoria/' . $value->id . '/edit') }} " class="btn btn-warning " role="button" aria-pressed="true">Editar</a></td>
+                                <td><form method='POST' action='{{ url('/categoria/' . $value->id) }}'>
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" class="btn btn-danger" value="Excluir">
+                                </form></td>
                             </tr>
                         @endforeach
                     </table>
