@@ -24,6 +24,12 @@
                         </div>
                     @endif
 
+                    <script>
+                        function ConfirmDelet(){
+                            return confirm('Tem certeza que deseja excluir esse registro?');
+                        }
+                    </script>
+
                     <table>
                         <tr>
                             <th>ID</th>
@@ -37,7 +43,7 @@
                                 <td>{{$value->nome}}</td>
                                 <td><a href=" {{ url('/categoria/' . $value->id) }} " class="btn btn-primary " role="button" aria-pressed="true">Visualizar</a></td>
                                 <td><a href=" {{ url('/categoria/' . $value->id . '/edit') }} " class="btn btn-warning " role="button" aria-pressed="true">Editar</a></td>
-                                <td><form method='POST' action='{{ url('/categoria/' . $value->id) }}'>
+                                <td><form method='POST' action='{{ url('/categoria/' . $value->id) }}' onsubmit="return ConfirmDelet()">
                                     @method('DELETE')
                                     @csrf
                                     <input type="submit" class="btn btn-danger" value="Excluir">
