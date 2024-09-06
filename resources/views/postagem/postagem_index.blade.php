@@ -7,7 +7,7 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="mx-auto">
-                        <a href=" {{ url('/categoria/create') }} " class="btn btn-success" role="button"
+                        <a href=" {{ url('/postagem/create') }} " class="btn btn-success" role="button"
                             aria-pressed="true">CRIAR</a>
                     </div>
 
@@ -35,21 +35,21 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
+                                <th>Titulo</th>
                                 <th class="text-center">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categorias as $value)
+                            @foreach ($postagens as $value)
                                 <tr>
                                     <th scope="row">{{ $value->id }}</th>
-                                    <td>{{ $value->nome }}</td>
+                                    <td>{{ $value->titulo }}</td>
                                     <td class="d-flex justify-content-around">
-                                        <a class="btn btn-primary" href="{{ url('/categoria/' . $value->id) }}"
+                                        <a class="btn btn-primary" href="{{ url('/postagem/' . $value->id) }}"
                                             role="button">Visualizar</a>
-                                        <a class="btn btn-warning" href="{{ url('/categoria/' . $value->id . '/edit') }}"
+                                        <a class="btn btn-warning" href="{{ url('/postagem/' . $value->id . '/edit') }}"
                                             role="button">Editar</a>
-                                        <form method="POST" action='{{ url('/categoria/' . $value->id) }}'
+                                        <form method="POST" action='{{ url('/postagem/' . $value->id) }}'
                                             onsubmit="return ConfirmDelete()">
                                             @method('DELETE')
                                             @csrf
