@@ -26,7 +26,7 @@
                     @endif
 
                     <script>
-                        function ConfirmDelet() {
+                        function ConfirmDelete() {
                             return confirm('Tem certeza que deseja excluir esse registro?');
                         }
                     </script>

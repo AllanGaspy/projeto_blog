@@ -26,7 +26,7 @@
                     @endif
 
                     <script>
-                        function ConfirmDelet() {
+                        function ConfirmDelete() {
                             return confirm('Tem certeza que deseja excluir esse registro?');
                         }
                     </script>
@@ -35,14 +35,16 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Categoria</th>
                                 <th>Titulo</th>
-                                <th class="text-center">Ação</th>
+                                <th class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($postagens as $value)
                                 <tr>
                                     <th scope="row">{{ $value->id }}</th>
+                                    <td>{{ $value->categoria->nome }}</td>
                                     <td>{{ $value->titulo }}</td>
                                     <td class="d-flex justify-content-around">
                                         <a class="btn btn-primary" href="{{ url('/postagem/' . $value->id) }}"

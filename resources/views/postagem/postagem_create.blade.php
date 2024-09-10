@@ -23,15 +23,15 @@
 
                             <label for="cars">Escolha uma categoria:</label><br>
 
-                                <select class="form-control" name="categoria_id" id="cars">
+                            <select class="form-control" name="categoria_id" id="cars">
 
-                                    @foreach($categorias as $value)
+                                @foreach($categorias as $value)
 
-                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    <option value="{{ $value->id }}">{{ $value->nome }}</option>
 
-                                    @endforeach
+                                @endforeach
 
-                                </select>
+                            </select>
 
                             <label for="exampleInputEmail1">Titulo</label>
                             <input type="text" name='titulo' class="form-control"placeholder="Digite o titulo da postagem">

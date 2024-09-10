@@ -17,7 +17,7 @@
                     @endif
 
                     <form method="POST" action="{{URL('/categoria/' . $categoria->id)}}">
-                        @method('PUT');
+                        @method('PUT')
                         @csrf
 
                         <div class="form-group">
