@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{URL('/postagem')}}">
+                <form method="POST" action="{{URL('/postagem')}}" enctype="multipart/form-data">
 
                     @csrf
                     <div class="form-group">
@@ -33,6 +33,10 @@
                             @endforeach
 
                         </select>
+
+                        <label>Imagem</label>
+                        <input type="file" name='imagem' class="form-control">
+
 
                         <label for="exampleInputEmail1">Titulo</label>
                         <input type="text" name='titulo' class="form-control"placeholder="Digite o titulo da postagem">
