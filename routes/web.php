@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FuncionarioController;
 use App\http\Controllers\CategoriaController;
 use App\http\Controllers\PostagemController;
+use App\http\Controllers\FeedController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/',[FeedController::class, 'welcome'])->name('welcome');
 
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
