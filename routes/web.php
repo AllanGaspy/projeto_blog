@@ -5,6 +5,7 @@ use App\Http\Controllers\FuncionarioController;
 use App\http\Controllers\CategoriaController;
 use App\http\Controllers\PostagemController;
 use App\http\Controllers\FeedController;
+use App\http\Controllers\ComentarioController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -18,6 +19,8 @@ Route::get('/feed/categoria{id}',[FeedController::class, 'categoriaById'])->name
 Route::get('/feed/autor',[FeedController::class, 'autor'])->name('feed.autor');
 Route::get('/feed/autor{id}',[FeedController::class, 'autorById'])->name('feed.autorById');
 
+Route::get('/feed/postagem/{id}/comentario', [FeedController::class, 'comentario'])->name('comentario');
+Route::post('comentario', [ComentarioController::class, 'store'])->name('comentario.store');
 
 Auth::routes();
 Route::middleware(['auth'])->group(function () {

@@ -14,7 +14,8 @@ class PostagemController extends Controller
      */
     public function index()
     {
-        $postagens=Postagem::orderBy('titulo','ASC')->get();
+        $user_id = Auth::id();
+        $postagens=Postagem::where('user_id', $user_id)->orderBy('titulo','ASC')->get();
         //dd($postagem);
         return view('postagem.postagem_index', compact('postagens'));
         dd('Postagem index');
@@ -79,6 +80,13 @@ class PostagemController extends Controller
      */
     public function edit(string $id)
     {
+        //Verificar se o usuario pode editar esta postagem
+        $user_id = Auth::id();
+        $ehDoUsuario = Postagem::where('id', $id)->where('user_id', $user_id)->exists();
+        if(!$ehDoUsuario){
+            return redirect()->route('postagem.index')->with('mensagem', 'Você não tem permissão para alterar esta postagem');
+        }
+
         $categorias=Categoria::orderBy('nome','ASC')->get();
         $postagem = Postagem::find($id);
         return view('postagem.postagem_edit', compact('postagem','categorias'));
@@ -90,6 +98,13 @@ class PostagemController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //Verificar se o usuario pode editar esta postagem
+        $user_id = Auth::id();
+        $ehDoUsuario = Postagem::where('id', $id)->where('user_id', $user_id)->exists();
+        if(!$ehDoUsuario){
+            return redirect()->route('postagem.index')->with('mensagem', 'Você não tem permissão para alterar esta postagem');
+        }
+
         // 1 - pegar o conteudo do arquivo
         if($request->file('imagem')){
             $content = file_get_contents($request->file('imagem'));

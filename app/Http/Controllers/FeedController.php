@@ -33,4 +33,9 @@ class FeedController extends Controller
         $postagens = Postagem::where('user_id', $id)->orderBy('id', 'DESC')->get();
         return view('feed.autorById', compact('postagens'));
     }
+
+    public function comentario($id){
+        $postagem = Postagem::find($id);
+        return view('feed.comentario', compact('postagem'));
+    }
 }
