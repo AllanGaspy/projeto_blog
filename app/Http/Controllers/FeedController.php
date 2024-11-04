@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Postagem;
 use App\Models\Categoria;
 use App\Models\User;
+use App\Models\Curtida;
+use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
@@ -37,5 +39,26 @@ class FeedController extends Controller
     public function comentario($id){
         $postagem = Postagem::find($id);
         return view('feed.comentario', compact('postagem'));
+    }
+
+    public function curtida($id){
+
+        //Pega o usuário autenticado
+        $user_id = Auth::id();
+
+        //Verificar se a curtida existe
+        $curtida_exist = Curtida::where('postagem_id', $id)->where('user_id', $user_id)->exists();
+
+        if(!$curtida_exist){
+            $curtida = new Curtida();
+            $curtida->postagem_id = $id;
+            $curtida->user_id = $user_id;
+            $curtida->save();
+        }else{
+            $curtida = Curtida::where('postagem_id', $id)->where('user_id', $user_id)->first();
+            $curtida->delete();
+        }
+
+        return back()->withInput();
     }
 }

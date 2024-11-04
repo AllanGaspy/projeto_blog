@@ -22,6 +22,8 @@ Route::get('/feed/autor{id}',[FeedController::class, 'autorById'])->name('feed.a
 Route::get('/feed/postagem/{id}/comentario', [FeedController::class, 'comentario'])->name('comentario');
 Route::post('comentario', [ComentarioController::class, 'store'])->name('comentario.store');
 
+Route::get('/feed/curtida/{id}', [FeedController::class, 'curtida'])->middleware('auth')->name('curtida');
+
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
