@@ -7,6 +7,8 @@ use App\Models\Postagem;
 use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Curtida;
+use App\Models\DenunciarPostagem;
+
 use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
@@ -58,6 +60,24 @@ class FeedController extends Controller
             $curtida = Curtida::where('postagem_id', $id)->where('user_id', $user_id)->first();
             $curtida->delete();
         }
+
+        return back()->withInput();
+    }
+
+    public function denunciarPostagem($id){
+        $postagem = Postagem::find($id);
+        return view('feed.denunciarPostagem', compact('postagem'));
+    }
+
+    public function denunciarPostagemStore(Request $request){
+
+        //Pega o usuário autenticado
+        $user_id = Auth::id();
+        $DenunciarPostagem = new DenunciarPostagem();
+        $DenunciarPostagem->postagem_id = $request->postagem_id;
+        $DenunciarPostagem->user_id = $user_id;
+        $DenunciarPostagem->conteudo = $request->conteudo;
+        $DenunciarPostagem->save();
 
         return back()->withInput();
     }
